@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Barang - Inventaris TB Takdir (Prototipe UTS)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="dashboard.html"><i class="bi bi-box-seam"></i> Inventaris TB Takdir</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Menu"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link " href="dashboard.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active" href="barang.html">Data Barang</a></li>
+            </ul>
+            <span class="navbar-text me-3"><i class="bi bi-person-circle"></i> Pemilik Toko <span class="badge bg-light text-primary">admin</span></span>
+            <a class="btn btn-outline-light btn-sm" href="login.html"><i class="bi bi-box-arrow-right"></i> Keluar</a>
+        </div>
+    </div>
+</nav>
+<main class="container py-4">
+    <h1 class="h4 mb-3">Data Barang</h1>
+    <div id="alertArea"></div>
+    <div class="card border-0 shadow-sm"><div class="card-body">
+        <div class="row g-2 mb-3">
+            <div class="col-md-4"><div class="input-group"><span class="input-group-text"><i class="bi bi-search"></i></span>
+                <input type="search" id="fSearch" class="form-control" placeholder="Cari kode, nama, kategori, lokasi..."></div></div>
+            <div class="col-6 col-md-3"><select id="fKategori" class="form-select"><option value="">Semua kategori</option></select></div>
+            <div class="col-6 col-md-3"><select id="fStatus" class="form-select"><option value="">Semua stok</option><option value="menipis">Stok menipis</option></select></div>
+            <div class="col-12 col-md-2"><button class="btn btn-primary w-100" id="btnTambah"><i class="bi bi-plus-lg"></i> Tambah</button></div>
+        </div>
+        <div class="table-responsive"><table class="table table-hover align-middle">
+            <thead><tr><th>Kode</th><th>Nama Barang</th><th>Kategori</th><th>Lokasi</th><th class="text-end">Stok</th><th class="text-center">Aksi</th></tr></thead>
+            <tbody id="tbBarang"></tbody></table></div>
+        <small class="text-muted" id="infoBarang"></small>
+    </div></div>
+</main>
+
+<div class="modal fade" id="modalForm" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"><div class="modal-dialog modal-lg">
+    <form class="modal-content" id="formBarang" novalidate>
+        <div class="modal-header"><h5 class="modal-title" id="modalFormTitle">Tambah Barang</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
+        <div class="modal-body"><input type="hidden" id="barangId"><div class="row g-3">
+            <div class="col-md-4"><label class="form-label" for="kode">Kode Barang</label><input type="text" class="form-control" id="kode" maxlength="30" placeholder="BRG-0008"><div class="invalid-feedback">Kode wajib diisi (huruf/angka/-/_).</div></div>
+            <div class="col-md-8"><label class="form-label" for="nama">Nama Barang</label><input type="text" class="form-control" id="nama" maxlength="150"><div class="invalid-feedback">Nama barang wajib diisi.</div></div>
+            <div class="col-md-4"><label class="form-label" for="kategori">Kategori</label><select class="form-select" id="kategori"><option value="">-- pilih --</option></select><div class="invalid-feedback">Kategori wajib dipilih.</div></div>
+            <div class="col-md-4"><label class="form-label" for="lokasi">Lokasi</label><select class="form-select" id="lokasi"><option value="">-- belum ditentukan --</option></select></div>
+            <div class="col-md-4"><label class="form-label" for="satuan">Satuan</label><input type="text" class="form-control" id="satuan" maxlength="20" placeholder="sak / pcs / kg"><div class="invalid-feedback">Satuan wajib diisi.</div></div>
+            <div class="col-md-6"><label class="form-label" for="stok">Stok</label><input type="number" min="0" class="form-control" id="stok" value="0"><div class="invalid-feedback">Stok harus angka bulat &gt;= 0.</div></div>
+            <div class="col-md-6"><label class="form-label" for="min">Stok Minimum</label><input type="number" min="0" class="form-control" id="min" value="0"><div class="invalid-feedback">Stok minimum harus angka bulat &gt;= 0.</div></div>
+        </div></div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button type="submit" class="btn btn-success">Simpan</button></div>
+    </form></div></div>
+
+<div class="modal fade" id="modalDetail" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Detail Barang</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
+    <div class="modal-body"><table class="table table-sm mb-0">
+        <tr><th style="width:38%">Kode</th><td id="dKode"></td></tr><tr><th>Nama</th><td id="dNama"></td></tr>
+        <tr><th>Kategori</th><td id="dKategori"></td></tr><tr><th>Lokasi</th><td id="dLokasi"></td></tr>
+        <tr><th>Stok</th><td id="dStok"></td></tr><tr><th>Stok Minimum</th><td id="dMin"></td></tr></table></div>
+    <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button></div>
+</div></div></div>
+
+<div class="modal fade" id="modalHapus" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-sm modal-dialog-centered"><div class="modal-content">
+    <div class="modal-body text-center"><i class="bi bi-exclamation-triangle text-danger fs-1"></i><p class="mt-2 mb-0">Hapus barang <strong id="hapusNama"></strong>?</p></div>
+    <div class="modal-footer justify-content-center"><button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-danger btn-sm" id="btnKonfirmasiHapus">Ya, hapus</button></div>
+</div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/dummy.js"></script>
+<script src="assets/js/prototype.js"></script>
+</body>
+</html>

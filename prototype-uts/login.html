@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Masuk - Inventaris TB Takdir</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/login.css" rel="stylesheet">
+</head>
+<body class="login-body">
+<div class="container login-shell">
+    <div class="row w-100 align-items-center g-5 mx-0">
+
+        <div class="col-lg-7 d-none d-lg-block">
+            <div class="hero-brand fs-5"><span class="logo"><i class="bi bi-boxes"></i></span> Inventaris TB Takdir</div>
+            <h1 class="hero-title">Stok bahan bangunan <span>tertata</span>,<br>lokasi barang mudah ditemukan.</h1>
+            <p class="hero-desc">Sistem inventaris toko bangunan untuk mencatat barang, memantau stok, dan menelusuri setiap perubahan stok dalam satu tempat.</p>
+            <ul class="hero-points">
+                <li><i class="bi bi-speedometer2"></i><div>Pantau stok terkini<small>Peringatan otomatis saat stok semen, cat, atau pipa menipis.</small></div></li>
+                <li><i class="bi bi-geo-alt"></i><div>Telusuri lokasi barang<small>Gudang, rak, dan etalase tercatat untuk setiap barang.</small></div></li>
+                <li><i class="bi bi-clock-history"></i><div>Riwayat perubahan stok<small>Siapa, kapan, berapa, dan alasannya, semuanya tercatat.</small></div></li>
+            </ul>
+        </div>
+
+        <div class="col-12 col-lg-5 col-xl-4 offset-xl-1 mx-auto mx-lg-0">
+            <div class="card login-card">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <span class="brand-icon"><i class="bi bi-box-seam"></i></span>
+                        <h2 class="h4 fw-bold mt-3 mb-1">Selamat datang</h2>
+                        <p class="text-muted mb-0">Masuk untuk mengelola inventaris toko</p>
+                    </div>
+
+                    <div class="alert alert-danger py-2 d-none align-items-center gap-2" id="loginError"><i class="bi bi-exclamation-circle"></i> <span></span></div>
+
+                    <form id="formLogin" novalidate>
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold">Email</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" class="form-control" id="email" placeholder="nama@email.com" autocomplete="username">
+                                <div class="invalid-feedback">Masukkan email yang valid.</div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label fw-semibold">Kata sandi</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" class="form-control" id="password" placeholder="Masukkan kata sandi" autocomplete="current-password">
+                                <button class="btn btn-toggle-pass" type="button" id="togglePass" aria-label="Tampilkan kata sandi"><i class="bi bi-eye"></i></button>
+                                <div class="invalid-feedback">Kata sandi wajib diisi.</div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-login w-100"><i class="bi bi-box-arrow-in-right"></i> Masuk</button>
+                    </form>
+
+                    <div class="demo-box mt-4 px-3 py-2">
+                        <div class="fw-semibold text-muted mb-1"><i class="bi bi-key"></i> Akun demo</div>
+                        <div class="demo-row">
+                            <div>Admin: <code>admin@mail.com</code> / <code>admin123</code></div>
+                            <button type="button" class="btn btn-outline-secondary btn-isi" data-email="admin@mail.com" data-pass="admin123">Isi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="login-foot text-center mt-3 mb-0">&copy; 2026 Inventaris TB Takdir</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script>
+    $('#formLogin').on('submit', function (e) {
+        e.preventDefault();
+        const email = $('#email').val().trim(), pass = $('#password').val();
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        $('#email').toggleClass('is-invalid', !emailOk);
+        $('#password').toggleClass('is-invalid', pass === '');
+        if (!emailOk || pass === '') return;
+        if (email === 'admin@mail.com' && pass === 'admin123') {
+            window.location.href = 'dashboard.html';
+        } else {
+            $('#loginError').removeClass('d-none').addClass('d-flex').find('span').text('Email atau kata sandi salah.');
+        }
+    });
+
+    $('#togglePass').on('click', function () {
+        const $p = $('#password'), show = $p.attr('type') === 'password';
+        $p.attr('type', show ? 'text' : 'password');
+        $(this).find('i').toggleClass('bi-eye', !show).toggleClass('bi-eye-slash', show);
+    });
+
+    $('.btn-isi').on('click', function () {
+        $('#email').val($(this).data('email')).removeClass('is-invalid');
+        $('#password').val($(this).data('pass')).removeClass('is-invalid');
+    });
+</script>
+</body>
+</html>

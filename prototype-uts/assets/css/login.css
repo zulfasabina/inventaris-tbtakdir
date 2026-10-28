@@ -1,0 +1,61 @@
+/* Halaman login: tema toko bangunan (rak gudang, semen, cat, pipa, bata) */
+:root { --amber: #f59e0b; --orange: #f97316; --navy: #0b1220; }
+
+.login-body {
+    min-height: 100vh;
+    color: #e2e8f0;
+    background:
+        linear-gradient(105deg, rgba(11, 18, 32, .93) 0%, rgba(11, 18, 32, .80) 48%, rgba(11, 18, 32, .55) 100%),
+        url("../img/login-bg.svg") center / cover no-repeat fixed;
+    background-color: var(--navy);
+}
+.login-shell { min-height: 100vh; display: flex; align-items: center; padding: 2rem 0; }
+
+/* ---- Sisi kiri: pesan utama ---- */
+.hero-brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; letter-spacing: .3px; color: #fff; }
+.hero-brand .logo {
+    width: 42px; height: 42px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--amber), var(--orange)); color: #111827; font-size: 1.3rem;
+}
+.hero-title { font-size: 2.5rem; font-weight: 700; line-height: 1.2; color: #fff; margin: 1.4rem 0 1rem; }
+.hero-title span { color: #fbbf24; }
+.hero-desc { color: #cbd5e1; max-width: 30rem; }
+.hero-points { list-style: none; padding: 0; margin: 1.6rem 0 0; }
+.hero-points li { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: .9rem; color: #e2e8f0; }
+.hero-points i {
+    flex: 0 0 34px; height: 34px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(251, 191, 36, .15); color: #fbbf24; font-size: 1.05rem;
+}
+.hero-points small { display: block; color: #94a3b8; }
+
+/* ---- Kartu login ---- */
+.login-card { background: rgba(255, 255, 255, .98); border: 0; border-radius: 18px; box-shadow: 0 24px 60px rgba(0, 0, 0, .5); color: #1f2937; }
+.login-card .brand-icon {
+    width: 58px; height: 58px; border-radius: 15px; display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--amber), var(--orange)); color: #111827; font-size: 1.7rem;
+    box-shadow: 0 8px 20px rgba(249, 115, 22, .35);
+}
+.login-card .form-control:focus { border-color: var(--orange); box-shadow: 0 0 0 .2rem rgba(249, 115, 22, .2); }
+.login-card .input-group-text { background: #f8fafc; color: #64748b; }
+.login-card .btn-toggle-pass { border-color: #dee2e6; background: #f8fafc; color: #64748b; }
+.btn-login {
+    background: linear-gradient(135deg, var(--amber), var(--orange)); border: 0; color: #111827; font-weight: 600; padding: .65rem 1rem;
+    transition: transform .08s ease, box-shadow .15s ease;
+}
+.btn-login:hover { color: #111827; box-shadow: 0 8px 18px rgba(249, 115, 22, .35); transform: translateY(-1px); }
+.btn-login:active { transform: translateY(0); }
+
+.demo-box { border: 1px dashed #cbd5e1; border-radius: 12px; background: #f8fafc; font-size: .82rem; }
+.demo-box .demo-row { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .35rem 0; }
+.demo-box .demo-row + .demo-row { border-top: 1px solid #e2e8f0; }
+.demo-box code { color: #0f172a; background: transparent; padding: 0; }
+.demo-box .btn-isi { font-size: .72rem; padding: .1rem .5rem; }
+
+.login-foot { color: #94a3b8; font-size: .8rem; }
+
+@media (max-width: 991.98px) {
+    .login-body { background:
+        linear-gradient(rgba(11, 18, 32, .86), rgba(11, 18, 32, .86)),
+        url("../img/login-bg.svg") center / cover no-repeat fixed; }
+    .login-shell { padding: 1.5rem 0; }
+}

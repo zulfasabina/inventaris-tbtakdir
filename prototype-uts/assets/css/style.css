@@ -1,0 +1,9 @@
+body { background: #f4f6f9; }
+.stat .fs-2 { line-height: 1.1; }
+.navbar-brand i { margin-right: .25rem; }
+.table > :not(caption) > * > * { vertical-align: middle; }
+.badge-stok { font-weight: 500; }
+@media (max-width: 575.98px) {
+    main.container { padding-left: .75rem; padding-right: .75rem; }
+    .btn-group .btn { padding: .25rem .4rem; }
+}
