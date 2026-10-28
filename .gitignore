@@ -1,0 +1,9 @@
+# Kredensial & konfigurasi lokal - jangan di-commit
+app/includes/config.php
+
+# Sistem / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
